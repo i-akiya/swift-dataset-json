@@ -1,11 +1,17 @@
-import XCTest
 @testable import swift_dataset_json
+import XCTest
 
-final class swift_dataset_jsonTests: XCTestCase {
-    func testExample() throws {
+@available(macOS 12, *)
+final class DatasetJsonTests: XCTestCase {
+    func testNumberOfRecord() throws {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct
         // results.
-        XCTAssertEqual(swift_dataset_json().text, "Hello, World!")
+
+        let path = NSHomeDirectory() + "/develop/data/DataExchange-DatasetJson-master/examples/sdtm/dm.json"
+        let bb = DatasetJson()
+
+        let df = try bb.ReadFile(path: path)
+        XCTAssertEqual(df.shape.rows, 18)
     }
 }
